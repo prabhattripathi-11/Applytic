@@ -7,11 +7,17 @@ services:
       - postgres
     env_file:
       - ../ms1-core-api/.env
+    volumes:
+      - ../ms1-core-api/uploads:/app/uploads
 
   ms2:
     build: ../ms2-match-agent
     ports:
       - "8000:8000"
+    env_file:
+      - ../.env
+    volumes:
+      - ../ms1-core-api/uploads:/app/uploads
 
   postgres:
     image: postgres:16

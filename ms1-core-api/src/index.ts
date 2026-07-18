@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import { pool } from "./db";
 import authRouter from "./routes/auth";
+import resumeRouter from "./routes/resume";
 import { requireAuth, requireRole, AuthenticatedRequest } from "./middleware/auth";
 
 dotenv.config();
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use("/auth", authRouter);
+app.use("/resume", resumeRouter);
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
