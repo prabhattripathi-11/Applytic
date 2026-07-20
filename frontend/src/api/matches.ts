@@ -1,4 +1,4 @@
-import { api } from "./client";
+import { api, agentApi } from "./client";
 
 export interface Match {
   id: string;
@@ -31,18 +31,8 @@ export async function getPostings(): Promise<Posting[]> {
 }
 
 export async function matchProfile(userId: string, parsedResume: any) {
-  const response = await fetch("/ms2/match-profile", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      user_id: userId,
-      parsed_resume: parsedResume,
-    }),
+  return await agentApi.post("/match-profile", {
+    user_id: userId,
+    parsed_resume: parsedResume,
   });
-  if (!response.ok) {
-    throw new Error("Match profile failed");
-  }
-  return response.json();
 }

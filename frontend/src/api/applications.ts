@@ -1,4 +1,4 @@
-import { api } from "./client";
+import { api, agentApi } from "./client";
 
 export interface Application {
   id: string;
@@ -20,8 +20,7 @@ export async function getApplication(id: string): Promise<Application> {
 }
 
 export async function draftApplication(match_id: string) {
-  // Use the proxy route mounted at root
-  return await api.post("/draft-application", { match_id });
+  return await agentApi.post("/draft-application", { match_id });
 }
 
 export async function updateApplicationField(id: string, updates: any): Promise<Application> {
